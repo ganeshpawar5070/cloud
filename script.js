@@ -2,6 +2,7 @@ alert("script loaded");
 const SERVER = "https://pine-forty-wide-caroline.trycloudflare.com";
 
 function login() {
+    alert("Login button clicked");
 
     const u = document.getElementById("username").value;
     const p = document.getElementById("password").value;
