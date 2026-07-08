@@ -1,2 +1,2 @@
 # cloud
-[Open HTML File](./index.html)
+[Open Website](https://ganeshpawar5070.github.io/cloud/)
