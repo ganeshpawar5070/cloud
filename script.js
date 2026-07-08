@@ -1,3 +1,4 @@
+alert("script loaded");
 const SERVER = "https://pine-forty-wide-caroline.trycloudflare.com";
 
 function login() {
