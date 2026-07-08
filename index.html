@@ -1,73 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Ganesh Cloud</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganesh Cloud</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#111827;
-    color:white;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.box {
-    background:#1f2937;
-    padding:40px;
-    border-radius:20px;
-    text-align:center;
-    width:300px;
-    box-shadow:0 0 20px #000;
-}
-
-h1 {
-    margin-bottom:10px;
-}
-
-p {
-    color:#cbd5e1;
-}
-
-button {
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:15px 40px;
-    border-radius:10px;
-    font-size:18px;
-    cursor:pointer;
-}
-
-button:hover {
-    background:#1d4ed8;
-}
-</style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="box">
+<div id="loginBox" class="card">
+    <h2>Ganesh Cloud</h2>
 
-<h1>☁️ Ganesh Cloud</h1>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
 
-<p>Private File Server</p>
+    <button onclick="login()">Login</button>
 
-<br>
+    <p id="msg"></p>
+</div>
 
-<a href="https://pine-forty-wide-caroline.trycloudflare.com">
-<button>
-LOGIN
-</button>
-</a>
+<div id="homeBox" class="card" style="display:none">
+
+    <h2>Welcome</h2>
+
+    <button onclick="openUpload()">
+        📤 Upload
+    </button>
+
+    <button onclick="openDownload()">
+        📥 Download
+    </button>
 
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
