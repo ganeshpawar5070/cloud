@@ -1,5 +1,5 @@
 alert("script loaded");
-const SERVER = "https://pine-forty-wide-caroline.trycloudflare.com";
+const SERVER = "https://dropped-server-forge-extending.trycloudflare.com/";
 
 function login() {
     alert("Login button clicked");
