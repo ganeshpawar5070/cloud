@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Update control.json
         run: |
@@ -29,9 +27,6 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-
           git add control.json
           git commit -m "start tunnel request" || true
-
-          git pull --rebase origin main
-          git push origin main
+          git push
