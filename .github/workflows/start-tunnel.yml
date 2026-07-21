@@ -2,6 +2,9 @@ name: Start Tunnel Request
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - start-tunnel
 
 permissions:
   contents: write
@@ -11,10 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Update control.json
         run: |
@@ -25,16 +26,10 @@ jobs:
           }
           EOF
 
-      - name: Commit and Push
+      - name: Commit change
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-
           git add control.json
-
-          git diff --cached --quiet && exit 0
-
-          git commit -m "Request tunnel start"
-
-          git pull --rebase origin main
-          git push origin HEAD:main
+          git commit -m "start tunnel request" || true
+          git push
