@@ -1,0 +1,29 @@
+name: Start Tunnel Request
+
+on:
+  workflow_dispatch:
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Update control.json
+        run: |
+          cat > control.json <<EOF
+          {
+            "request": "start",
+            "url": ""
+          }
+          EOF
+
+      - name: Commit change
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add control.json
+          git commit -m "start tunnel request" || true
+          git push
