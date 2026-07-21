@@ -2,10 +2,6 @@ name: Start Tunnel Request
 
 on:
   workflow_dispatch:
-name: Start Tunnel Request
-
-on:
-  workflow_dispatch:
 
 permissions:
   contents: write
