@@ -11,8 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Update control.json
         run: |
@@ -23,10 +25,16 @@ jobs:
           }
           EOF
 
-      - name: Commit change
+      - name: Commit and Push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+
           git add control.json
-          git commit -m "start tunnel request" || true
-          git push
+
+          git diff --cached --quiet && exit 0
+
+          git commit -m "Request tunnel start"
+
+          git pull --rebase origin main
+          git push origin HEAD:main
