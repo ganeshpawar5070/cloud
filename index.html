@@ -5,30 +5,82 @@
     <title>Start Tunnel</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        button { padding: 12px 24px; font-size: 18px; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; }
-        #status { margin-top: 20px; font-weight: bold; }
+        button { padding: 12px 28px; font-size: 18px; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; }
+        #status { margin-top: 20px; font-weight: bold; font-size: 18px; }
+        #linkContainer { margin-top: 15px; font-size: 18px; }
+        a { color: #007bff; font-weight: bold; text-decoration: none; }
     </style>
 </head>
 <body>
 
     <button onclick="startTunnel()">START</button>
     <p id="status"></p>
+    <div id="linkContainer"></div>
 
     <script>
         const WORKER_URL = "https://bitter-sound-0ae9.ganeshpawar5070.workers.dev/";
 
         async function startTunnel() {
             const statusEl = document.getElementById("status");
-            statusEl.innerText = "Triggering Action...";
+            const linkEl = document.getElementById("linkContainer");
             
+            statusEl.style.color = "black";
+            statusEl.innerText = "Triggering Action...";
+            linkEl.innerHTML = "";
+
             try {
+                // 1. Worker URL par Dispatch Trigger bhejna
                 const response = await fetch(WORKER_URL, { method: "POST" });
+
                 if (response.ok) {
-                    statusEl.innerText = "✅ Action Triggered Successfully!";
+                    // 2. Action trigger hone par 1 se 10 sec ka Countdown
+                    let count = 1;
+                    const interval = setInterval(async () => {
+                        statusEl.innerText = `Waiting... (${count}/10 sec)`;
+
+                        if (count >= 10) {
+                            clearInterval(interval);
+                            statusEl.innerText = "Fetching control.json...";
+                            
+                            // 3. 10 Second baad control.json se URL fetch karna
+                            await loadControlJson();
+                        }
+                        count++;
+                    }, 1000);
+
                 } else {
-                    statusEl.innerText = "❌ Failed to trigger (Check Worker Code/Token).";
+                    statusEl.style.color = "red";
+                    statusEl.innerText = "❌ Action Trigger Failed!";
                 }
             } catch (err) {
+                statusEl.style.color = "red";
+                statusEl.innerText = "❌ Error: " + err.message;
+            }
+        }
+
+        async function loadControlJson() {
+            const statusEl = document.getElementById("status");
+            const linkEl = document.getElementById("linkContainer");
+
+            try {
+                // Cache issue avoid karne ke liye timestamp (?t=...) lagaya hai
+                const res = await fetch('./control.json?t=' + new Date().getTime());
+                
+                if (!res.ok) throw new Error("control.json file nahi mili!");
+
+                const data = await res.json();
+
+                statusEl.style.color = "green";
+                statusEl.innerText = "✅ Completed!";
+
+                if (data.url) {
+                    linkEl.innerHTML = `Tunnel URL: <a href="${data.url}" target="_blank">${data.url}</a>`;
+                } else {
+                    linkEl.innerText = "URL nahi mila control.json me.";
+                }
+
+            } catch (err) {
+                statusEl.style.color = "red";
                 statusEl.innerText = "❌ Error: " + err.message;
             }
         }
