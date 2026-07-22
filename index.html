@@ -1,34 +1,38 @@
-<button onclick="startTunnel()">START</button>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Start Tunnel</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        button { padding: 12px 24px; font-size: 18px; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 5px; }
+        #status { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
 
-<p id="status"></p>
+    <button onclick="startTunnel()">START</button>
+    <p id="status"></p>
 
-<script>
+    <script>
+        const WORKER_URL = "https://bitter-sound-0ae9.ganeshpawar5070.workers.dev/";
 
-async function startTunnel(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){
+        async function startTunnel() {
+            const statusEl = document.getElementById("status");
+            statusEl.innerText = "Triggering Action...";
+            
+            try {
+                const response = await fetch(WORKER_URL, { method: "POST" });
+                if (response.ok) {
+                    statusEl.innerText = "✅ Action Triggered Successfully!";
+                } else {
+                    statusEl.innerText = "❌ Failed to trigger (Check Worker Code/Token).";
+                }
+            } catch (err) {
+                statusEl.innerText = "❌ Error: " + err.message;
+            }
+        }
+    </script>
 
-document.getElementById("status").innerHTML =
-"Starting...";
-
-await fetch(
-"https://api.github.com/repos/ganeshpawar5070/cloud/dispatches",
-{
-method:"POST",
-
-headers:{
-"Accept":"application/vnd.github+json",
-"Authorization":"Bearer YOUR_TOKEN",
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-event_type:"start-tunnel"
-})
-
-});
-
-document.getElementById("status").innerHTML =
-"Action triggered";
-
-}
-
-</script>
+</body>
+</html>
