@@ -1,4 +1,4 @@
 {
-  "request": "start",
-  "url": ""
+    "request": "stop",
+    "url": "https://railroad-lens-choosing-clinic.trycloudflare.com"
 }
