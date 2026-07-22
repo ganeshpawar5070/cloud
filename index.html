@@ -1,104 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Start</title>
-
-<style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial;
-    background:#f5f5f5;
-}
-
-#container{
-    text-align:center;
-}
-
-button{
-    padding:15px 40px;
-    font-size:22px;
-    cursor:pointer;
-}
-
-#count{
-    font-size:70px;
-    margin-top:20px;
-}
-
-#result{
-    margin-top:20px;
-    font-size:22px;
-    color:blue;
-}
-</style>
-</head>
-<body>
-
-<div id="container">
-
-<button id="startBtn">START</button>
-
-<div id="count"></div>
-
-<div id="result"></div>
-
-</div>
-
 <script>
+const triggerURL = "https://bitter-sound-0ae9.ganeshpawar5070.workers.dev/";
 
-const triggerURL = "https://bitter-sound-0ae9.ganeshpawar5070.workers.dev/"; // Trigger URL
+document.getElementById("startBtn").onclick = function () {
 
-document.getElementById("startBtn").onclick = function(){
+    // Button gayab
+    this.style.display = "none";
 
-    this.style.display="none";
-
-    // Trigger Hit
-    fetch(triggerURL).catch(()=>{});
+    // Trigger hit
+    fetch(triggerURL, {
+        method: "GET",
+        mode: "no-cors"   // Agar CORS allow na ho to bhi request bhejne ki koshish karega
+    }).catch(() => {});
 
     let sec = 1;
-
     document.getElementById("count").innerHTML = sec;
 
-    let timer = setInterval(()=>{
+    const timer = setInterval(() => {
 
         sec++;
 
-        if(sec<=10){
+        if (sec <= 10) {
             document.getElementById("count").innerHTML = sec;
         }
 
-        if(sec>10){
-
+        if (sec > 10) {
             clearInterval(timer);
 
-            // 10 sec ke baad hi control.json read hoga
+            // Sirf 10 second baad control.json read hogi
             fetch("control.json")
-            .then(r=>r.json())
-            .then(data=>{
-
-                document.getElementById("result").innerHTML =
-                    '<a href="'+data.url+'" target="_blank">'+data.url+'</a>';
-
-            })
-            .catch(()=>{
-
-                document.getElementById("result").innerHTML =
-                "control.json not found.";
-
-            });
-
+                .then(r => r.json())
+                .then(data => {
+                    document.getElementById("result").innerHTML =
+                        `<a href="${data.url}" target="_blank">${data.url}</a>`;
+                })
+                .catch(() => {
+                    document.getElementById("result").innerHTML =
+                        "control.json not found.";
+                });
         }
 
-    },1000);
-
+    }, 1000);
 };
-
 </script>
-
-</body>
-</html>
