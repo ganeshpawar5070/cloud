@@ -1,4 +1,4 @@
 {
-  "request": "start",
-  "url": ""
+    "request": "stop",
+    "url": "https://job-posing-tiny-athens.trycloudflare.com"
 }
