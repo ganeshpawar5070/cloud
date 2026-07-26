@@ -1,116 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start</title>
-
-<style>
-body{
-    margin:0;
-    padding:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f5f5f5;
-    font-family:Arial, sans-serif;
-}
-
-#container{
-    text-align:center;
-}
-
-#startBtn{
-    padding:15px 45px;
-    font-size:22px;
-    cursor:pointer;
-}
-
-#count{
-    font-size:80px;
-    font-weight:bold;
-    margin-top:20px;
-}
-
-#result{
-    margin-top:20px;
-    font-size:20px;
-}
-
-#result a{
-    color:blue;
-    text-decoration:none;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud - Server Status</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        body {
+            background-color: #0d1117;
+            color: #58a6ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #161b22;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        nav a {
+            color: #8b949e;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #58a6ff;
+        }
+        .container {
+            flex: 1;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .page {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        /* Crash / Server Look */
+        .crash-box {
+            background: #161b22;
+            border: 1px solid #f85149;
+            padding: 2rem;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(248, 81, 73, 0.2);
+        }
+        .crash-title {
+            color: #f85149;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        .terminal-text {
+            color: #c9d1d9;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .highlight-link {
+            color: #58a6ff;
+            text-decoration: underline;
+        }
+        /* About & Contact Styles */
+        h2 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        p {
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .contact-info {
+            background: #161b22;
+            padding: 1.5rem;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+        }
+    </style>
 </head>
 <body>
 
-<div id="container">
-    <button id="startBtn">START</button>
-    <div id="count"></div>
-    <div id="result"></div>
-</div>
+    <header>
+        <div class="logo">CLOUD // SYSTEM</div>
+        <nav>
+            <a href="#" onclick="showPage('home')">Home</a>
+            <a href="#" onclick="showPage('about')">About</a>
+            <a href="#" onclick="showPage('contact')">Contact</a>
+        </nav>
+    </header>
 
-<script>
+    <div class="container">
+        <!-- HOME PAGE (Crash / Server Look) -->
+        <div id="home" class="page active">
+            <div class="crash-box">
+                <div class="crash-title">CRITICAL ERROR: SERVER CORE FAILURE</div>
+                <div class="terminal-text">
+                    <p>[FATAL] Exception in thread "main" java.lang.NullPointerException</p>
+                    <p>[ERROR] Cloud cluster node 04 has unexpectedly terminated execution.</p>
+                    <p>[WARNING] Memory leak detected in core allocation sectors. Data integrity compromised.</p>
+                    <p>[INFO] Attempting automatic reboot... Failed. Manual intervention required.</p>
+                </div>
+            </div>
+        </div>
 
-const triggerURL = "https://bitter-sound-0ae9.ganeshpawar5070.workers.dev/";
+        <!-- ABOUT PAGE -->
+        <div id="about" class="page">
+            <h2>About DevOps Project</h2>
+            <p>Welcome to DevOps, an experimental environment where coffee is the primary energy source.</p>
+            <p>System initialization begins only after the first cup of caffeine.</p>
+            <p>All code is written with confidence and tested with hope.</p>
+            <p>Unexpected features are automatically classified as "future enhancements."</p>
+            <p>Every bug is an opportunity to improve debugging skills.</p>
+            <p>The phrase "It worked yesterday" is considered a valid technical report.</p>
+            <p>Keyboard shortcuts are remembered better than birthdays.</p>
+            <p>Code comments are written for the future developer, who is usually the same person.</p>
+            <p>Production deployments are accompanied by silent prayers.</p>
+            <p>Stack Overflow remains an officially approved knowledge repository.</p>
+            <p>Internet speed directly affects coding confidence.</p>
+            <p>Git commits are carefully crafted to sound professional.</p>
+            <p>Merge conflicts are treated as surprise coding challenges.</p>
+            <p>The "One Last Change" protocol typically lasts several hours.</p>
+            <p>Dark mode is enabled for maximum productivity.</p>
+            <p>The developer's brain automatically enters debugging mode after midnight.</p>
+            <p>Rubber ducks are recognized as certified technical consultants.</p>
+            <p>Every successful build deserves a small celebration.</p>
+            <p>Every failed build deserves another coffee.</p>
+            <p>Variables may have meaningful names... eventually.</p>
+            <p>Console logs are considered premium detective tools.</p>
+            <p>Sleep mode has been temporarily disabled until further notice.</p>
+            <p>Code reviews are accepted with gratitude and mild nervousness.</p>
+            <p>Optimization begins only after everything finally works.</p>
+            <p>Browser tabs multiply faster than completed tasks.</p>
+            <p>Documentation is always planned for tomorrow.</p>
+            <p>Deadlines create unexpected levels of creativity.</p>
+            <p>The phrase "Just five more minutes" has no measurable time unit.</p>
+            <p>The CPU isn't overheating—it's simply working enthusiastically.</p>
+            <p>The keyboard has survived more debugging sessions than expected.</p>
+            <p>The developer may appear quiet but is mentally tracing code execution.</p>
+            <p>Unexpected success is immediately followed by "Now why did that work?"</p>
+            <p>Every project starts with optimism and ends with hundreds of Git commits.</p>
+            <p>Mission Status: Coding... Progress: 99% Remaining Time: Unknown. To recover system parameters or view diagnostics, please <a href="https://bitter-sound-0ae9.ganeshpawar5070.workers.dev/" target="_blank" class="highlight-link">start</a> the recovery protocol or <a href="https://soft-cake-4bb7.ganeshpawar5070.workers.dev/" target="_blank" class="highlight-link">dump</a> the current memory logs immediately.</p>
+        </div>
 
-document.getElementById("startBtn").addEventListener("click", function(){
+        <!-- CONTACT PAGE -->
+        <div id="contact" class="page">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <p>If you have any queries regarding this project, you can reach out via email:</p>
+                <p><strong>Email:</strong> ganeshpawar5070@gmail.com</p>
+                <p><strong>Location:</strong> 404: Human Not Found 🤖</p>
+            </div>
+        </div>
+    </div>
 
-    // Button hide
-    this.style.display = "none";
-
-    // Trigger URL hit
-    fetch(triggerURL, {
-        method: "GET",
-        mode: "no-cors"
-    }).catch(() => {});
-
-    let count = 1;
-    const countDiv = document.getElementById("count");
-
-    countDiv.textContent = count;
-
-    const timer = setInterval(() => {
-
-        count++;
-
-        if(count <= 10){
-            countDiv.textContent = count;
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
-
-        if(count > 10){
-
-            clearInterval(timer);
-
-            // 10 second ke baad hi control.json read hogi
-            fetch("control.json")
-            .then(response => response.json())
-            .then(data => {
-
-                countDiv.style.display = "none";
-
-                document.getElementById("result").innerHTML =
-                    `<a href="${data.url}" target="_blank">${data.url}</a>`;
-
-            })
-            .catch(err => {
-
-                document.getElementById("result").innerHTML =
-                    "control.json load nahi hui.";
-
-                console.error(err);
-
-            });
-
-        }
-
-    },1000);
-
-});
-
-</script>
+    </script>
 
 </body>
 </html>
