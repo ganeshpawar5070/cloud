@@ -1,4 +1,5 @@
 {
-    "request": "stop",
-    "url": "https://defensive-heights-allowance-trial.trycloudflare.com"
+    "request": "",
+    "url": "",
+    "kill": "1"
 }
